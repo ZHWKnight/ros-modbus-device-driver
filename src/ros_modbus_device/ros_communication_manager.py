@@ -31,10 +31,10 @@ class ROSCommunicationManager:
         'INT'	: Int16,
         'DINT'	: Int32,
         'LINT'	: Int64,
-        'USINT'	: Int8,
-        'UINT'	: Int16,
-        'UDINT'	: Int32,
-        'ULINT'	: Int64,
+        'USINT'	: UInt8,
+        'UINT'	: UInt16,
+        'UDINT'	: UInt32,
+        'ULINT'	: UInt64,
         'REAL'	: Float32,
         'LREAL'	: Float64,
         'CHAR'	: Char,
@@ -50,7 +50,7 @@ class ROSCommunicationManager:
     # all make_attach_* methods get passed an input object and have to
     # return a callable object with one parameter (taking the input value)
     def make_attach_publisher(self, input):
-        pub = rospy.Publisher(self.device.dev_name(input.name), self.mapping[input.type], queue_size=10)
+        pub = rospy.Publisher(self.device.dev_name(input.name) + '/read', self.mapping[input.type], queue_size=10)
         self.publishers.append(pub)
         return pub.publish
         
